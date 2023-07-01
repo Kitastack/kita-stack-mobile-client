@@ -9,7 +9,6 @@ export default function MyAppBar({
 	back,
 }: NativeStackHeaderProps) {
 	const title = getHeaderTitle(options, route.name);
-	console.log(title);
 	return (
 		<Appbar.Header>
 			{back ? <Appbar.BackAction onPress={() => router.back()} /> : <></>}
