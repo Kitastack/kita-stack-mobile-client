@@ -3,6 +3,11 @@ import { getHeaderTitle } from "@react-navigation/elements";
 import { router } from "expo-router";
 import { NativeStackHeaderProps } from "@react-navigation/native-stack";
 
+/**
+ * Wrapper for material 3 AppBar, should included from stack screen options.
+ *
+ * You can overide this by disable stack header and use `<AppBar/>` from `react-native-paper` directly into routes
+ */
 export default function MyAppBar({
 	route,
 	options,

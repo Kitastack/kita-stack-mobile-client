@@ -4,7 +4,8 @@ import { View } from "react-native";
 import { Text } from "react-native-paper";
 export default function Pages() {
 	return (
-		<View style={{ flex: 1, flexDirection: "column" }}>
+		<View>
+			<Text>tes</Text>
 			<Text>tes</Text>
 		</View>
 	);
