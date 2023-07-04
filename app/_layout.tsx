@@ -10,13 +10,14 @@ import {
 	DarkTheme as NavigationDarkTheme,
 	DefaultTheme as NavigationDefaultTheme,
 } from "@react-navigation/native";
+import { en, registerTranslation } from "react-native-paper-dates";
 import merge from "deepmerge";
 import { useColorScheme } from "react-native";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 
 import MyAppBar from "components/base/MyAppBar";
 import { Stack } from "expo-router";
-import { useMemo } from "react";
+import { useEffect, useMemo } from "react";
 
 const { LightTheme, DarkTheme } = adaptNavigationTheme({
 	reactNavigationLight: NavigationDefaultTheme,
@@ -36,6 +37,9 @@ export default function Layout() {
 				: { ...combinedTheme.default },
 		[colorScheme]
 	);
+	useEffect(() => {
+		registerTranslation("en", en);
+	}, []);
 	return (
 		<SafeAreaProvider
 			style={{

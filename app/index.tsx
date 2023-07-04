@@ -1,21 +1,40 @@
 import { View } from "react-native";
 import {
 	Appbar,
+	Avatar,
 	Button,
+	Card,
 	Dialog,
+	Divider,
 	Portal,
 	Text,
 	useTheme,
 } from "react-native-paper";
 import { useState } from "react";
-
 import { Stack, router } from "expo-router";
 export default function Page() {
 	const paperTheme = useTheme();
 	const [dialogVisibility, setDialogVisibility] = useState(false);
 	return (
 		<>
-			<Stack.Screen options={{ title: "" }} />
+			<Stack.Screen options={{ title: "", header: () => null }} />
+			<Appbar.Header mode="large">
+				<Appbar.Content title="Home Page" />
+				<Appbar.Action
+					icon={"cog-outline"}
+					aria-label="pengaturan"
+					onPress={() => {
+						router.push("/settings");
+					}}
+				/>
+				<Appbar.Action
+					icon={"login"}
+					aria-label="Login"
+					onPress={() => {
+						router.replace("/login");
+					}}
+				/>
+			</Appbar.Header>
 			<View
 				style={{
 					flex: 1,
@@ -25,18 +44,46 @@ export default function Page() {
 				}}
 			>
 				<View style={{ rowGap: 8 }}>
-					<Text variant="displaySmall">
-						Testing Voice Recognition
-					</Text>
-					<Text variant="bodyLarge">
-						this is my attempt for creating voice recognition in
-						android
-					</Text>
+					{/* <Text variant="displaySmall">Dashboard</Text> */}
+					<Card mode="contained">
+						<Card.Title
+							title="Kontak Emergensi Publik"
+							subtitle="Nomor Polisi, dll"
+							left={(props) => (
+								<Avatar.Icon
+									{...props}
+									icon={"contacts-outline"}
+								/>
+							)}
+						/>
+					</Card>
+					<Card mode="contained">
+						<Card.Title
+							title="Member SOS"
+							subtitle="Pilih nomor SOS disini"
+							left={(props) => (
+								<Avatar.Icon
+									{...props}
+									icon={"account-supervisor-circle-outline"}
+								/>
+							)}
+						/>
+					</Card>
+					<Card mode="contained">
+						<Card.Title
+							title="Pesan Otomatis"
+							subtitle="Pengiriman pesan otomatis saat gawat darurat"
+							left={(props) => (
+								<Avatar.Icon {...props} icon={"whatsapp"} />
+							)}
+						/>
+					</Card>
+					<Divider />
 					<Button
 						mode="contained"
 						onPress={() => setDialogVisibility(true)}
 					>
-						test geolocations
+						SOS
 					</Button>
 					<Button
 						mode="elevated"
@@ -44,6 +91,8 @@ export default function Page() {
 					>
 						to Settings
 					</Button>
+
+					{/* dialog screen */}
 					<Portal>
 						<Dialog
 							visible={dialogVisibility}

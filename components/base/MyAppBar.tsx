@@ -1,4 +1,4 @@
-import { Appbar } from "react-native-paper";
+import { Appbar, useTheme } from "react-native-paper";
 import { getHeaderTitle } from "@react-navigation/elements";
 import { router } from "expo-router";
 import { NativeStackHeaderProps } from "@react-navigation/native-stack";
@@ -14,8 +14,9 @@ export default function MyAppBar({
 	back,
 }: NativeStackHeaderProps) {
 	const title = getHeaderTitle(options, route.name);
+	const theme = useTheme();
 	return (
-		<Appbar.Header>
+		<Appbar.Header style={{ backgroundColor: theme.colors.surface }}>
 			{back ? <Appbar.BackAction onPress={() => router.back()} /> : <></>}
 			<Appbar.Content title={title || ""} />
 		</Appbar.Header>
