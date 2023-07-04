@@ -1633,11 +1633,6 @@
   dependencies:
     "@hapi/hoek" "^9.0.0"
 
-"@importantimport/material-color-utilities@0.2.2-alpha.0":
-  version "0.2.2-alpha.0"
-  resolved "https://registry.yarnpkg.com/@importantimport/material-color-utilities/-/material-color-utilities-0.2.2-alpha.0.tgz#79dd2118306cf58ebd7773e58a464560e984edad"
-  integrity sha512-/481q5LRZxr4xFGH++WpTMumCACDTAOZZK+cWrVx95hZ7c0v9q2uVPD/DkP0+iOPUwAxvGWshMPHER3gu1TzHw==
-
 "@jest/create-cache-key-function@^29.2.1":
   version "29.5.0"
   resolved "https://registry.yarnpkg.com/@jest/create-cache-key-function/-/create-cache-key-function-29.5.0.tgz#24e019d03e634be4affe8bcee787d75a36ae57a2"
@@ -1789,14 +1784,6 @@
   dependencies:
     mkdirp "^1.0.4"
     rimraf "^3.0.2"
-
-"@pchmn/expo-material3-theme@^1.0.1":
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/@pchmn/expo-material3-theme/-/expo-material3-theme-1.0.1.tgz#1b136450a1ccbb5f37de414ab8d985020276a5e0"
-  integrity sha512-jVvqQRNr+GxB7qdQBHT4puCJxGjOqLSNEOr7/RiXfAP5dJBkc3372gFKasHO8eHRpS7mx1p0sPAXjLSs5ia9SQ==
-  dependencies:
-    "@importantimport/material-color-utilities" "0.2.2-alpha.0"
-    color "^4.2.3"
 
 "@radix-ui/react-compose-refs@1.0.0":
   version "1.0.0"
