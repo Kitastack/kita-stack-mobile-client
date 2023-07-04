@@ -1,4 +1,4 @@
-import { View } from "react-native";
+import { FlatList, View } from "react-native";
 import {
 	Appbar,
 	Avatar,
@@ -12,6 +12,42 @@ import {
 } from "react-native-paper";
 import { useState } from "react";
 import { Stack, router } from "expo-router";
+import { styles } from "@/constants/style";
+
+interface CardItemProp {
+	id: number;
+	icon: string;
+	title: string;
+	subtitle: string;
+}
+
+const cardItems: CardItemProp[] = [
+	{
+		id: 0,
+		icon: "contacts-outline",
+		title: "Kontak",
+		subtitle: "Nomor darurat nasional",
+	},
+	{
+		id: 1,
+		icon: "message",
+		title: "Pesan",
+		subtitle: "pesan darurat",
+	},
+	{
+		id: 2,
+		icon: "car-emergency",
+		title: "SOS?",
+		subtitle: "fitur SOS lainnya",
+	},
+	{
+		id: 3,
+		icon: "account-circle-outline",
+		title: "Akun Anda",
+		subtitle: "Fitur akun",
+	},
+];
+
 export default function Page() {
 	const paperTheme = useTheme();
 	const [dialogVisibility, setDialogVisibility] = useState(false);
@@ -35,50 +71,47 @@ export default function Page() {
 					}}
 				/>
 			</Appbar.Header>
+
+			{/* main app */}
 			<View
 				style={{
-					flex: 1,
-					flexDirection: "column",
+					...styles.flexCol,
 					gap: 2,
 					paddingHorizontal: 16,
 				}}
 			>
-				<View style={{ rowGap: 8 }}>
-					{/* <Text variant="displaySmall">Dashboard</Text> */}
-					<Card mode="contained">
-						<Card.Title
-							title="Kontak Emergensi Publik"
-							subtitle="Nomor Polisi, dll"
-							left={(props) => (
-								<Avatar.Icon
-									{...props}
-									icon={"contacts-outline"}
-								/>
-							)}
-						/>
-					</Card>
-					<Card mode="contained">
-						<Card.Title
-							title="Member SOS"
-							subtitle="Pilih nomor SOS disini"
-							left={(props) => (
-								<Avatar.Icon
-									{...props}
-									icon={"account-supervisor-circle-outline"}
-								/>
-							)}
-						/>
-					</Card>
-					<Card mode="contained">
-						<Card.Title
-							title="Pesan Otomatis"
-							subtitle="Pengiriman pesan otomatis saat gawat darurat"
-							left={(props) => (
-								<Avatar.Icon {...props} icon={"whatsapp"} />
-							)}
-						/>
-					</Card>
+				<View style={{ ...styles.flexCol, gap: 8 }}>
+					<FlatList
+						data={cardItems}
+						numColumns={2}
+						columnWrapperStyle={{
+							columnGap: 4,
+							justifyContent: "space-evenly",
+						}}
+						contentContainerStyle={{ rowGap: 4 }}
+						renderItem={(prop) => (
+							<Card style={{ flexGrow: 1 }} mode="contained">
+								<Card.Content style={{ maxWidth: "100%" }}>
+									<Avatar.Icon icon={prop.item.icon} />
+									<Text variant="titleLarge">
+										{prop.item.title}
+									</Text>
+									<Text
+										variant="bodyMedium"
+										numberOfLines={1}
+										ellipsizeMode="tail"
+										style={{}}
+									>
+										{prop.item.subtitle || ""}
+									</Text>
+								</Card.Content>
+							</Card>
+						)}
+						keyExtractor={(item) => item.id.toString()}
+					/>
+
 					<Divider />
+
 					<Button
 						mode="contained"
 						onPress={() => setDialogVisibility(true)}
@@ -86,13 +119,12 @@ export default function Page() {
 						SOS
 					</Button>
 					<Button
-						mode="elevated"
+						mode="outlined"
 						onPress={() => router.push("/settings")}
 					>
 						to Settings
 					</Button>
 
-					{/* dialog screen */}
 					<Portal>
 						<Dialog
 							visible={dialogVisibility}

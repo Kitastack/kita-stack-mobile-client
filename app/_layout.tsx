@@ -14,18 +14,20 @@ import { en, registerTranslation } from "react-native-paper-dates";
 import merge from "deepmerge";
 import { useColorScheme } from "react-native";
 import { SafeAreaProvider } from "react-native-safe-area-context";
-
-import MyAppBar from "components/base/MyAppBar";
 import { Stack } from "expo-router";
-import { useEffect, useMemo } from "react";
+import { useMemo } from "react";
+registerTranslation("en", en);
+
+import MyAppBar from "@/components/base/MyAppBar";
+import { KSDarkTheme, KSLightTheme } from "@/constants/papertheme";
 
 const { LightTheme, DarkTheme } = adaptNavigationTheme({
 	reactNavigationLight: NavigationDefaultTheme,
 	reactNavigationDark: NavigationDarkTheme,
 });
 const combinedTheme = {
-	default: merge(MD3LightTheme, LightTheme),
-	dark: merge(MD3DarkTheme, DarkTheme),
+	default: merge(LightTheme, KSLightTheme),
+	dark: merge(DarkTheme, KSDarkTheme),
 };
 
 export default function Layout() {
@@ -37,9 +39,7 @@ export default function Layout() {
 				: { ...combinedTheme.default },
 		[colorScheme]
 	);
-	useEffect(() => {
-		registerTranslation("en", en);
-	}, []);
+
 	return (
 		<SafeAreaProvider
 			style={{
