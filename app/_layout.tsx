@@ -1,4 +1,3 @@
-import { useMaterial3Theme } from "@pchmn/expo-material3-theme";
 import {
 	useTheme,
 	PaperProvider,
@@ -17,6 +16,7 @@ import { SafeAreaProvider } from "react-native-safe-area-context";
 
 import MyAppBar from "components/base/MyAppBar";
 import { Stack } from "expo-router";
+import { useMemo } from "react";
 
 const { LightTheme, DarkTheme } = adaptNavigationTheme({
 	reactNavigationLight: NavigationDefaultTheme,
@@ -29,11 +29,13 @@ const combinedTheme = {
 
 export default function Layout() {
 	const colorScheme = useColorScheme();
-	const { theme } = useMaterial3Theme();
-	const paperTheme =
-		colorScheme === "dark"
-			? { ...combinedTheme.dark, colors: theme.dark }
-			: { ...combinedTheme.default, colors: theme.light };
+	const paperTheme = useMemo(
+		() =>
+			colorScheme === "dark"
+				? { ...combinedTheme.dark }
+				: { ...combinedTheme.default },
+		[colorScheme]
+	);
 	return (
 		<SafeAreaProvider
 			style={{
