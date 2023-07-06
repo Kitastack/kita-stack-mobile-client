@@ -2,13 +2,10 @@ import { FlatList, ScrollView, View } from "react-native";
 import {
 	Appbar,
 	Avatar,
-	Button,
 	Card,
-	Dialog,
-	Divider,
 	FAB,
-	Portal,
 	Text,
+	TouchableRipple,
 	useTheme,
 } from "react-native-paper";
 import { useState } from "react";
@@ -36,6 +33,7 @@ const cardItems: CardItemProp[] = [
 		icon: "message",
 		title: "Pesan",
 		subtitle: "pesan darurat",
+		href: "/home/message",
 	},
 	{
 		id: 2,
@@ -49,6 +47,14 @@ const cardItems: CardItemProp[] = [
 		icon: "account-circle",
 		title: "Akun Anda",
 		subtitle: "Fitur akun",
+		href: "/home/account",
+	},
+	{
+		id: 4,
+		icon: "toolbox-outline",
+		title: "Status",
+		subtitle: "Kontrol sensor, data, dll",
+		href: "/settings",
 	},
 ];
 
@@ -58,66 +64,69 @@ export default function Page() {
 	return (
 		<>
 			<Stack.Screen options={{ title: "", header: () => null }} />
-			<Appbar.Header mode="large">
-				<Appbar.Content title="Home Page" />
-				<Appbar.Action
-					icon={"cog-outline"}
-					aria-label="pengaturan"
-					onPress={() => {
-						router.push("/settings");
-					}}
-				/>
-			</Appbar.Header>
-
 			{/* main app */}
-			<View
-				style={{
-					...styles.flexVertical,
-					gap: 2,
-					paddingHorizontal: 16,
-					paddingBottom: 8,
-				}}
-			>
-				<View style={{ ...styles.flexVertical, gap: 8 }}>
-					<FlatList
-						data={cardItems}
-						numColumns={2}
-						columnWrapperStyle={{
-							columnGap: 4,
-							justifyContent: "space-evenly",
+			<FlatList
+				data={cardItems}
+				ListHeaderComponent={() => (
+					<Appbar.Header
+						mode="large"
+						style={{
+							backgroundColor: paperTheme.colors.surface,
 						}}
-						contentContainerStyle={{ rowGap: 4 }}
-						renderItem={(prop) => (
-							<Card
-								onPress={() =>
-									prop.item.href
-										? router.push(prop.item.href)
-										: {}
-								}
-								style={{ flexGrow: 1 }}
-								mode="contained"
+					>
+						<Appbar.Content title="Home Page" />
+						<Appbar.Action
+							icon={"cog-outline"}
+							aria-label="pengaturan"
+							onPress={() => {
+								router.push("/settings");
+							}}
+						/>
+					</Appbar.Header>
+				)}
+				numColumns={2}
+				columnWrapperStyle={{
+					columnGap: 4,
+					justifyContent: "space-evenly",
+				}}
+				contentContainerStyle={{ rowGap: 4 }}
+				style={{
+					flexGrow: 1,
+					paddingHorizontal: 16,
+				}}
+				ListFooterComponent={() => (
+					<View style={{ paddingVertical: 40 }} />
+				)}
+				renderItem={(prop) => (
+					<Card
+						onPress={() =>
+							prop.item.href ? router.push(prop.item.href) : {}
+						}
+						style={{ flexGrow: 1 }}
+						mode="contained"
+					>
+						<Card.Content style={{ maxWidth: "100%" }}>
+							<Avatar.Icon icon={prop.item.icon} />
+							<Text variant="titleLarge">{prop.item.title}</Text>
+							<Text
+								variant="bodyMedium"
+								numberOfLines={1}
+								ellipsizeMode="tail"
+								style={{}}
 							>
-								<Card.Content style={{ maxWidth: "100%" }}>
-									<Avatar.Icon icon={prop.item.icon} />
-									<Text variant="titleLarge">
-										{prop.item.title}
-									</Text>
-									<Text
-										variant="bodyMedium"
-										numberOfLines={1}
-										ellipsizeMode="tail"
-										style={{}}
-									>
-										{prop.item.subtitle || ""}
-									</Text>
-								</Card.Content>
-							</Card>
-						)}
-						keyExtractor={(item) => item.id.toString()}
-					/>
-				</View>
-				<FAB mode="flat" icon={"toolbox-outline"} style={styles.fab} />
-			</View>
+								{prop.item.subtitle || ""}
+							</Text>
+						</Card.Content>
+					</Card>
+				)}
+				keyExtractor={(item) => item.id.toString()}
+			/>
+			<FAB
+				mode="elevated"
+				variant="primary"
+				icon={"microphone-variant"}
+				style={styles.fab}
+			/>
 		</>
 	);
 }

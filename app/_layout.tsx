@@ -53,7 +53,7 @@ export default function Layout() {
 						: combinedTheme.default
 				}
 			>
-				<PaperProvider theme={paperTheme}>
+				<PaperProvider theme={{ ...paperTheme }}>
 					<Stack
 						screenOptions={{
 							header: (props) => <MyAppBar {...props} />,
