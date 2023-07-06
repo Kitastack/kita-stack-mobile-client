@@ -3360,6 +3360,13 @@ expo-constants@~14.4.2:
     "@expo/config" "~8.1.0"
     uuid "^3.3.2"
 
+expo-contacts@~12.2.0:
+  version "12.2.0"
+  resolved "https://registry.yarnpkg.com/expo-contacts/-/expo-contacts-12.2.0.tgz#31325aa4c3d1e2c14085e43c499a5825329e739c"
+  integrity sha512-ZVRbF3OEGQ02nwwqaBxEic761mio8+GHo8I6jy/UQ5CF5azauY+2LUA5JskmuZbBAZMqZfhkbnZ56w8RXXcE5A==
+  dependencies:
+    uuid "^3.4.0"
+
 expo-dev-client@~2.4.4:
   version "2.4.4"
   resolved "https://registry.yarnpkg.com/expo-dev-client/-/expo-dev-client-2.4.4.tgz#9e64d9c0a737bd9548e87fd24bde3c49774a71d5"
@@ -3490,7 +3497,7 @@ expo-sms@~11.4.0:
   resolved "https://registry.yarnpkg.com/expo-sms/-/expo-sms-11.4.0.tgz#9bbcb4f959f2b26fdca876c6710b01ea3dd0ee4f"
   integrity sha512-q+3eQ7hqINPg5TGNeIKU6WQ+7642kHH2OAeKCrtGVRL207cosXlR8GheN7PI/e161dq1b0PAO8ly3myNg/1cLg==
 
-expo-splash-screen@~0.20.2:
+expo-splash-screen@~0.20.2, expo-splash-screen@~0.20.4:
   version "0.20.4"
   resolved "https://registry.yarnpkg.com/expo-splash-screen/-/expo-splash-screen-0.20.4.tgz#abe77d7a9612627f7048d885cfc5a696e3d3ee3d"
   integrity sha512-JMfVqkb3Fbt9mdrWfSkTxaIkjd2RMJmQ19/JN+4Gk2MVEP4L1yzTQLomneH5+z/N5x48Tk3ZN+bFhtUXIlfjzg==
