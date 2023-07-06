@@ -7,6 +7,11 @@ module.exports = function (api) {
       alias: {
         "@": "./"
       }
-    }], "expo-router/babel", "react-native-paper/babel", 'react-native-reanimated/plugin'],
+    }], "expo-router/babel", 'react-native-reanimated/plugin'],
+    env: {
+      production: {
+        plugins: ['react-native-paper/babel'],
+      },
+    },
   };
 };
