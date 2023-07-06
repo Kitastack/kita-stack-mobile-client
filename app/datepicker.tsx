@@ -1,9 +1,29 @@
+import DateTimePicker, {
+	DateTimePickerEvent,
+} from "@react-native-community/datetimepicker";
+import React from "react";
 import { useState } from "react";
 import { View } from "react-native";
-import { DatePickerInput } from "react-native-paper-dates";
+import { Button, Text } from "react-native-paper";
+import { DatePickerInput, TimePicker } from "react-native-paper-dates";
+import { TimePickerModal } from "react-native-paper-dates/lib/typescript/Time/TimePickerModal";
 
 export default function Page() {
-	const [inputDate, setInputDate] = useState<Date | undefined>(undefined);
+	const [inputDate, setInputDate] = useState(new Date());
+	const [visible, setVisible] = useState(false);
+	const onDateChange = (
+		e: DateTimePickerEvent,
+		selectedDate: Date | undefined
+	) => {
+		const temp = selectedDate;
+		setVisible(false);
+		if (temp) {
+			setInputDate(temp);
+		}
+	};
+	const openDate = () => {
+		setVisible(true);
+	};
 	return (
 		<View
 			style={{
@@ -13,14 +33,17 @@ export default function Page() {
 				paddingHorizontal: 16,
 			}}
 		>
-			<DatePickerInput
-				mode="outlined"
-				locale="en"
-				label={"Birthdate"}
-				value={inputDate}
-				onChange={(e) => setInputDate(e)}
-				inputMode="start"
-			/>
+			<Button mode="contained" onPress={openDate}>
+				Show date picker
+			</Button>
+			<Text>current date : {inputDate.toLocaleString()}</Text>
+			{visible && (
+				<DateTimePicker
+					value={inputDate}
+					mode="time"
+					onChange={onDateChange}
+				/>
+			)}
 		</View>
 	);
 }

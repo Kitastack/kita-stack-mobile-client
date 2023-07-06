@@ -1,8 +1,8 @@
 import { router } from "expo-router";
 import React from "react";
 import { useState } from "react";
-import { View } from "react-native";
-import { Button, Text } from "react-native-paper";
+import { ScrollView, View } from "react-native";
+import { Button, Card, Text } from "react-native-paper";
 import { TimePicker, TimePickerModal } from "react-native-paper-dates";
 export default function Pages() {
 	const [visible, setVisible] = useState(false);
@@ -18,7 +18,7 @@ export default function Pages() {
 		[setVisible]
 	);
 	return (
-		<View
+		<ScrollView
 			style={{
 				flex: 1,
 				flexDirection: "column",
@@ -27,20 +27,11 @@ export default function Pages() {
 			}}
 		>
 			<Text>Time picker</Text>
-			<Text>tes</Text>
-			<Button onPress={() => router.push("/datepicker")}>
-				to date picker
-			</Button>
-			<Button onPress={() => setVisible(true)} mode="outlined">
-				Pick time
-			</Button>
-			<TimePickerModal
-				visible={visible}
-				onConfirm={onConfirm}
-				onDismiss={onDismiss}
-				hours={12}
-				minutes={18}
-			/>
-		</View>
+			<Card onPress={() => router.push("/datepicker")}>
+				<Card.Content>
+					<Text variant="titleSmall">Open Dev session</Text>
+				</Card.Content>
+			</Card>
+		</ScrollView>
 	);
 }

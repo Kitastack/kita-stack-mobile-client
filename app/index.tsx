@@ -1,4 +1,4 @@
-import { FlatList, View } from "react-native";
+import { FlatList, ScrollView, View } from "react-native";
 import {
 	Appbar,
 	Avatar,
@@ -19,6 +19,7 @@ interface CardItemProp {
 	icon: string;
 	title: string;
 	subtitle: string;
+	href?: string;
 }
 
 const cardItems: CardItemProp[] = [
@@ -27,6 +28,7 @@ const cardItems: CardItemProp[] = [
 		icon: "contacts-outline",
 		title: "Kontak",
 		subtitle: "Nomor darurat nasional",
+		href: "/home/contact",
 	},
 	{
 		id: 1,
@@ -78,6 +80,7 @@ export default function Page() {
 					...styles.flexCol,
 					gap: 2,
 					paddingHorizontal: 16,
+					paddingBottom: 8,
 				}}
 			>
 				<View style={{ ...styles.flexCol, gap: 8 }}>
@@ -90,7 +93,15 @@ export default function Page() {
 						}}
 						contentContainerStyle={{ rowGap: 4 }}
 						renderItem={(prop) => (
-							<Card style={{ flexGrow: 1 }} mode="contained">
+							<Card
+								onPress={() =>
+									prop.item.href
+										? router.push(prop.item.href)
+										: {}
+								}
+								style={{ flexGrow: 1 }}
+								mode="contained"
+							>
 								<Card.Content style={{ maxWidth: "100%" }}>
 									<Avatar.Icon icon={prop.item.icon} />
 									<Text variant="titleLarge">
@@ -130,17 +141,18 @@ export default function Page() {
 							visible={dialogVisibility}
 							onDismiss={() => setDialogVisibility(false)}
 						>
-							<Dialog.Title>Alert</Dialog.Title>
+							<Dialog.Title>Oh maaf!</Dialog.Title>
 							<Dialog.Content>
 								<Text variant="bodyMedium">
-									this is content
+									Pengguna harus melakukan Log In terlebih
+									dahulu untuk menjalankan fungsi ini.
 								</Text>
 							</Dialog.Content>
 							<Dialog.Actions>
 								<Button
 									onPress={() => setDialogVisibility(false)}
 								>
-									close dialog
+									Tutup
 								</Button>
 							</Dialog.Actions>
 						</Dialog>
