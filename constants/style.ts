@@ -1,12 +1,18 @@
 import { StyleSheet } from "react-native";
 
 export const styles = StyleSheet.create({
-	flexRow: {
+	flexHorizontal: {
 		flex: 1,
 		flexDirection: "row",
 	},
-	flexCol: {
+	flexVertical: {
 		flex: 1,
 		flexDirection: "column",
+	},
+	fab: {
+		position: "absolute",
+		margin: 16,
+		right: 0,
+		bottom: 0,
 	},
 });
