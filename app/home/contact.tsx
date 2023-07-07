@@ -9,6 +9,7 @@ import {
 	IconButton,
 	Portal,
 	Text,
+	useTheme,
 } from "react-native-paper";
 import * as Linking from "expo-linking";
 import { styles } from "@/constants/style";
@@ -28,6 +29,7 @@ const contactList: Contacts[] = [
 ];
 
 export default function Page() {
+	const theme = useTheme();
 	const { fetchNewData, member, nationalPhone, status } = useContactStore();
 	const [selectedContact, setSelectedContact] = useState({
 		name: "",
@@ -47,7 +49,7 @@ export default function Page() {
 		<>
 			<Stack.Screen options={{ title: "" }} />
 			<ScrollView nestedScrollEnabled style={{ paddingHorizontal: 16 }}>
-				{/* <Button onPress={() => fetchNewData()}>Add item</Button> */}
+				<Button onPress={() => fetchNewData()}>Add item</Button>
 				<Divider style={{ marginVertical: 8 }} />
 				<Text variant="titleLarge">Nomor Darurat Umum: </Text>
 				<FlatList
@@ -99,14 +101,17 @@ export default function Page() {
 						</Text>
 					</Dialog.Content>
 					<Dialog.Actions>
+						<Button mode="outlined" icon={"phone"}>
+							Panggil
+						</Button>
 						<Button
+							style={{}}
 							onPress={() =>
 								setContactConfirmationDialogVisible(false)
 							}
 						>
 							Batal
 						</Button>
-						<Button icon={"phone"}>Panggil</Button>
 					</Dialog.Actions>
 				</Dialog>
 			</Portal>
