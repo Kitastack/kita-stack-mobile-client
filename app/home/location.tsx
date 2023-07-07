@@ -1,6 +1,6 @@
 import { Stack, useFocusEffect } from "expo-router";
 import { ScrollView } from "react-native";
-import { Text } from "react-native-paper";
+import { Button, Text } from "react-native-paper";
 import * as Location from "expo-location";
 import { useCallback, useEffect, useState } from "react";
 import { useSafeAreaFrame } from "react-native-safe-area-context";
@@ -47,6 +47,7 @@ export default function Page() {
 				<Text variant="labelMedium">status: {locationStatus}</Text>
 				<Text variant="displaySmall">Lokasi Saat ini</Text>
 				<Text>{currentLocation}</Text>
+				<Button>get location</Button>
 			</ScrollView>
 		</>
 	);

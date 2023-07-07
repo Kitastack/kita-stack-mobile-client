@@ -31,7 +31,7 @@ const cardItems: CardItemProp[] = [
 	{
 		id: 1,
 		icon: "message",
-		title: "Pesan",
+		title: "SMS",
 		subtitle: "pesan darurat",
 		href: "/home/message",
 	},
@@ -63,27 +63,32 @@ export default function Page() {
 	const [dialogVisibility, setDialogVisibility] = useState(false);
 	return (
 		<>
-			<Stack.Screen options={{ title: "", header: () => null }} />
+			<Stack.Screen
+				options={{
+					title: "",
+					header: () => (
+						<Appbar.Header
+							mode="medium"
+							style={{
+								backgroundColor: paperTheme.colors.surface,
+							}}
+						>
+							<Appbar.Content title="Home Page" />
+							<Appbar.Action
+								icon={"cog-outline"}
+								aria-label="pengaturan"
+								onPress={() => {
+									router.push("/settings");
+								}}
+							/>
+						</Appbar.Header>
+					),
+				}}
+			/>
 			{/* main app */}
 			<FlatList
 				data={cardItems}
-				ListHeaderComponent={() => (
-					<Appbar.Header
-						mode="large"
-						style={{
-							backgroundColor: paperTheme.colors.surface,
-						}}
-					>
-						<Appbar.Content title="Home Page" />
-						<Appbar.Action
-							icon={"cog-outline"}
-							aria-label="pengaturan"
-							onPress={() => {
-								router.push("/settings");
-							}}
-						/>
-					</Appbar.Header>
-				)}
+				ListHeaderComponent={() => <></>}
 				numColumns={2}
 				columnWrapperStyle={{
 					columnGap: 4,
