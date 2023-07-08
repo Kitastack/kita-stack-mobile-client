@@ -26,7 +26,7 @@ const cardItems: CardItemProp[] = [
 		icon: "contacts-outline",
 		title: "Kontak",
 		subtitle: "Nomor darurat nasional",
-		href: "/home/contact",
+		href: "/contact",
 	},
 	{
 		id: 1,

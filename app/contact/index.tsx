@@ -30,7 +30,7 @@ const contactList: Contacts[] = [
 
 export default function Page() {
 	const theme = useTheme();
-	const { fetchNewData, member, nationalPhone, status } = useContactStore();
+	const { fetchNewData, nationalPhone, status } = useContactStore();
 	const [selectedContact, setSelectedContact] = useState({
 		name: "",
 		phoneNumber: "",
@@ -47,42 +47,28 @@ export default function Page() {
 
 	return (
 		<>
-			<Stack.Screen options={{ title: "" }} />
-			<ScrollView nestedScrollEnabled style={{ paddingHorizontal: 16 }}>
-				<Button onPress={() => fetchNewData()}>Add item</Button>
-				<Divider style={{ marginVertical: 8 }} />
-				<Text variant="titleLarge">Nomor Darurat Umum: </Text>
-				<FlatList
-					nestedScrollEnabled
-					horizontal
-					data={nationalPhone}
-					showsHorizontalScrollIndicator={false}
-					contentContainerStyle={{ columnGap: 8, padding: 2 }}
-					renderItem={({ item }) => (
-						<Card
-							style={{ maxWidth: 160 }}
-							mode="outlined"
-							onPress={() =>
-								selectCurrentContact(
-									item.name,
-									item.phoneNumber
-								)
-							}
-						>
-							<Card.Content>
-								<Text variant="displaySmall">
-									{item.phoneNumber}
-								</Text>
-								<Text variant="bodyLarge">{item.name}</Text>
-							</Card.Content>
-						</Card>
-					)}
-					keyExtractor={({ name }) => name}
-				/>
-				<Divider style={{ marginVertical: 8 }} />
-				<Text variant="titleMedium">Kontak yang anda percaya: </Text>
-			</ScrollView>
-
+			<FlatList
+				nestedScrollEnabled
+				data={nationalPhone}
+				contentContainerStyle={{ gap: 8, padding: 8 }}
+				renderItem={({ item }) => (
+					<Card
+						// style={{ maxWidth: 160 }}
+						mode="contained"
+						onPress={() =>
+							selectCurrentContact(item.name, item.phoneNumber)
+						}
+					>
+						<Card.Content>
+							<Text variant="displaySmall">
+								{item.phoneNumber}
+							</Text>
+							<Text>{item.name}</Text>
+						</Card.Content>
+					</Card>
+				)}
+				keyExtractor={({ name }) => name}
+			/>
 			{/* different view */}
 			<Portal>
 				<Dialog
