@@ -14,7 +14,7 @@ import {
 import * as Linking from "expo-linking";
 import { styles } from "@/constants/style";
 import { useContactStore } from "@/lib/hooks/useContactStore";
-import { Suspense, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 interface Contacts {
 	id: string;
 	name: string;
@@ -44,6 +44,9 @@ export default function Page() {
 		setSelectedContact({ name: name, phoneNumber });
 		setContactConfirmationDialogVisible(true);
 	}
+	useEffect(() => {
+		fetchNewData();
+	}, []);
 
 	return (
 		<>

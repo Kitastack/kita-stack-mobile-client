@@ -13,7 +13,6 @@ import { Stack, router } from "expo-router";
 import { styles } from "@/constants/style";
 
 interface CardItemProp {
-	id: number;
 	icon: string;
 	title: string;
 	subtitle: string;
@@ -22,37 +21,32 @@ interface CardItemProp {
 
 const cardItems: CardItemProp[] = [
 	{
-		id: 0,
 		icon: "contacts-outline",
 		title: "Kontak",
 		subtitle: "Nomor darurat nasional",
 		href: "/contact",
 	},
 	{
-		id: 1,
 		icon: "message",
-		title: "SMS",
-		subtitle: "pesan darurat",
+		title: "SMS Darurat",
+		subtitle: "Kelola pesan darurat otomatis anda",
 		href: "/home/message",
 	},
 	{
-		id: 2,
 		icon: "map-marker",
 		title: "Lokasi",
 		subtitle: "lokasimu",
 		href: "/home/location",
 	},
 	{
-		id: 3,
-		icon: "account-circle",
-		title: "Akun Anda",
-		subtitle: "Fitur akun",
+		icon: "account-group-outline",
+		title: "Kerabat",
+		subtitle: "Kelola kerabat yang dapat anda hubungi",
 		href: "/home/account",
 	},
 	{
-		id: 4,
 		icon: "toolbox-outline",
-		title: "Status",
+		title: "Peralatan",
 		subtitle: "Kontrol sensor, data, dll",
 		href: "/settings",
 	},
@@ -63,30 +57,34 @@ export default function Page() {
 	const [dialogVisibility, setDialogVisibility] = useState(false);
 	return (
 		<>
+			{/* TODO: create profile button + avatar */}
 			<Stack.Screen
 				options={{
 					title: "",
 					header: () => (
-						<Appbar.Header
-							mode="medium"
-							style={{
-								backgroundColor: paperTheme.colors.surface,
-							}}
-						>
-							<Appbar.Content title="Home Page" />
-							<Appbar.Action
-								icon={"cog-outline"}
-								aria-label="pengaturan"
-								onPress={() => {
-									router.push("/settings");
+						<>
+							<Appbar.Header
+								mode="medium"
+								style={{
+									backgroundColor: paperTheme.colors.surface,
 								}}
-							/>
-						</Appbar.Header>
+							>
+								<Appbar.Content title="Hallo, Adhinata" />
+								<Appbar.Action
+									icon={"account"}
+									aria-label="Akun"
+									onPress={() => {
+										router.push("/home/account");
+									}}
+								/>
+							</Appbar.Header>
+						</>
 					),
 				}}
 			/>
 			{/* main app */}
 			<FlatList
+				nestedScrollEnabled
 				data={cardItems}
 				ListHeaderComponent={() => <></>}
 				numColumns={2}
@@ -94,13 +92,15 @@ export default function Page() {
 					columnGap: 4,
 					justifyContent: "space-evenly",
 				}}
-				contentContainerStyle={{ rowGap: 4 }}
-				style={{
-					flexGrow: 1,
+				contentContainerStyle={{
+					rowGap: 4,
 					paddingHorizontal: 16,
 				}}
+				style={{
+					flexGrow: 1,
+				}}
 				ListFooterComponent={() => (
-					<View style={{ paddingVertical: 40 }} />
+					<View style={{ paddingVertical: 20 }} />
 				)}
 				renderItem={(prop) => (
 					<Card
@@ -115,16 +115,15 @@ export default function Page() {
 							<Text variant="titleLarge">{prop.item.title}</Text>
 							<Text
 								variant="bodyMedium"
-								numberOfLines={1}
 								ellipsizeMode="tail"
-								style={{}}
+								style={{ maxWidth: 160 }}
 							>
 								{prop.item.subtitle || ""}
 							</Text>
 						</Card.Content>
 					</Card>
 				)}
-				keyExtractor={(item) => item.id.toString()}
+				keyExtractor={(item) => item.title.toString()}
 			/>
 			<FAB
 				mode="elevated"
