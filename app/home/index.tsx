@@ -42,7 +42,7 @@ const cardItems: CardItemProp[] = [
 		icon: "account-group-outline",
 		title: "Kerabat",
 		subtitle: "Kelola kerabat yang dapat anda hubungi",
-		href: "/home/account",
+		href: "/member",
 	},
 	{
 		icon: "toolbox-outline",
