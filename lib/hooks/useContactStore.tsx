@@ -1,15 +1,17 @@
 import { create } from "zustand";
 
+export interface Contact {
+	id: string
+	name: string;
+	phoneNumber: string;
+	infoUrl?: string;
+	logoImgUrl?: string;
+}
+
 export interface ContactStore {
 	date: string;
 	status: "loading" | undefined;
-	member?:
-		| {
-				name: string;
-				phoneNumber: string;
-				infoUrl?: string;
-				logoImgUrl?: string;
-		  }[];
+	member:Contact[];
 	nationalPhone?:
 		| {
 				name: string;
@@ -23,7 +25,7 @@ export interface ContactStore {
 export const useContactStore = create<ContactStore>((set) => ({
 	date: new Date().toISOString(),
 	status: undefined,
-	member: undefined,
+	member: [],
 	fetchNewData: () =>
 		set((state) => ({
 			nationalPhone: [
