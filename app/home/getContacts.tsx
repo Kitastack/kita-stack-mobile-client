@@ -46,6 +46,7 @@ export default function Page() {
 				setLoading(true);
 				const { data } = await ExpoContacts.getContactsAsync();
 				setContactList(data);
+				setFilteredContactList(data);
 				setLoading(false);
 			} else {
 				console.log("Failed to get access into contacts");
