@@ -1,29 +1,31 @@
 import { create } from "zustand";
 
+export interface MemberContact {
+	id: string;
+	name: string;
+	phoneNumber: string;
+	infoUrl?: string;
+	logoImgUrl?: string;
+}
+export interface NationalContact {
+	name: string;
+	phoneNumber: string;
+	infoUrl?: string;
+	logoImgUrl?: string;
+}
+
 export interface ContactStore {
 	date: string;
 	status: "loading" | undefined;
-	member?:
-		| {
-				name: string;
-				phoneNumber: string;
-				infoUrl?: string;
-				logoImgUrl?: string;
-		  }[];
-	nationalPhone?:
-		| {
-				name: string;
-				phoneNumber: string;
-				infoUrl?: string;
-				logoImgUrl?: string;
-		  }[];
+	member: MemberContact[];
+	nationalPhone?: NationalContact[];
 	fetchNewData: () => void;
 }
 
 export const useContactStore = create<ContactStore>((set) => ({
 	date: new Date().toISOString(),
 	status: undefined,
-	member: undefined,
+	member: [],
 	fetchNewData: () =>
 		set((state) => ({
 			nationalPhone: [

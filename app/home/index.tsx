@@ -23,13 +23,13 @@ const cardItems: CardItemProp[] = [
 	{
 		icon: "contacts-outline",
 		title: "Kontak",
-		subtitle: "Nomor darurat nasional",
+		subtitle: "Layanan nasional",
 		href: "/contact",
 	},
 	{
 		icon: "message",
 		title: "SMS Darurat",
-		subtitle: "Kelola pesan darurat otomatis anda",
+		subtitle: "Kelola pesan darurat otomatis",
 		href: "/home/message",
 	},
 	{
@@ -42,7 +42,7 @@ const cardItems: CardItemProp[] = [
 		icon: "account-group-outline",
 		title: "Kerabat",
 		subtitle: "Kelola kerabat yang dapat anda hubungi",
-		href: "/home/account",
+		href: "/member",
 	},
 	{
 		icon: "toolbox-outline",

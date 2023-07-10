@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "Kita Rescue",
-    "slug": "gemastik-kitastack",
+    "slug": "kitarescue",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -16,7 +16,8 @@
     "ios": {
       "supportsTablet": false,
       "infoPlist": {
-        "UIBackgroundModes": ["location", "fetch"]
+        "UIBackgroundModes": ["location", "fetch"],
+        "NSContactsUsageDescription": "Allow $(PRODUCT_NAME) to access your contacts."
       }
     },
     "android": {
@@ -24,7 +25,15 @@
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "package": "com.kitastack.kitarescue"
+      "package": "com.kitastack.kitarescue",
+      "permissions": [
+        "android.permission.ACCESS_COARSE_LOCATION",
+        "android.permission.ACCESS_FINE_LOCATION",
+        "android.permission.FOREGROUND_SERVICE",
+        "android.permission.ACCESS_BACKGROUND_LOCATION",
+        "android.permission.READ_CONTACTS",
+        "android.permission.WRITE_CONTACTS"
+      ]
     },
     "web": {
       "favicon": "./assets/favicon.png",
@@ -50,7 +59,11 @@
     "extra": {
       "router": {
         "origin": false
+      },
+      "eas": {
+        "projectId": "ef943fb6-50d2-44e2-a3fc-78585a707b87"
       }
-    }
+    },
+    "owner": "agung-adhinata"
   }
 }
