@@ -1,7 +1,13 @@
 import { create } from "zustand";
 
-export interface Contact {
-	id: string
+export interface MemberContact {
+	id: string;
+	name: string;
+	phoneNumber: string;
+	infoUrl?: string;
+	logoImgUrl?: string;
+}
+export interface NationalContact {
 	name: string;
 	phoneNumber: string;
 	infoUrl?: string;
@@ -11,14 +17,8 @@ export interface Contact {
 export interface ContactStore {
 	date: string;
 	status: "loading" | undefined;
-	member:Contact[];
-	nationalPhone?:
-		| {
-				name: string;
-				phoneNumber: string;
-				infoUrl?: string;
-				logoImgUrl?: string;
-		  }[];
+	member: MemberContact[];
+	nationalPhone?: NationalContact[];
 	fetchNewData: () => void;
 }
 
