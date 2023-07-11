@@ -1,7 +1,7 @@
 import { Stack, router } from "expo-router";
 import { ScrollView } from "react-native";
 import * as ExpoContacts from "expo-contacts";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { Button, Card, Searchbar, Text, Title } from "react-native-paper";
 import { MemberProps } from "@/lib/hooks/useMemberStore";
 import { useMessageStore } from "@/lib/hooks/useMessageStore";
@@ -26,32 +26,43 @@ export default function Page() {
 		]);
 		router.back();
 	}
-	function preprocessContactList(searchText: string) {
-		setSearchValue(searchText);
-		// console.log(searchText);
-	}
-	function search() {
-		const regex = RegExp(searchValue || "", "i");
+	const resetSearch = useCallback(() => {
+		setSearchValue("text");
 		setLoading(true);
-		setFilteredContactList(
-			contactList.filter((val, _) => val.name.match(regex))
-		);
-		setLoading(false);
-	}
+		(async () => {
+			const { data } = await ExpoContacts.getContactsAsync();
+			setContactList(data);
+			setLoading(false);
+		})();
+	}, []);
+	const search = useCallback(
+		(overrideText?: string) => {
+			console.log("test");
+			setLoading(true);
+
+			const searchText = (searchValue || "").toLowerCase();
+			(async () => {
+				const { data } = await ExpoContacts.getContactsAsync({
+					name: searchText.toLowerCase(),
+				});
+				setContactList(data);
+				setLoading(false);
+			})();
+		},
+		[searchValue]
+	);
 
 	useEffect(() => {
 		(async () => {
 			const { status } = await ExpoContacts.requestPermissionsAsync();
 			if (status === ExpoContacts.PermissionStatus.GRANTED) {
 				setLoading(true);
-				const { data } = await ExpoContacts.getContactsAsync();
+				const { data } = await ExpoContacts.getContactsAsync({});
 				setContactList(data);
-				setFilteredContactList(data);
 				setLoading(false);
 			} else {
 				console.log("Failed to get access into contacts");
 			}
-			search();
 		})();
 		setCurrentTargetMember(targetMember);
 	}, []);
@@ -61,7 +72,9 @@ export default function Page() {
 			<Stack.Screen options={{ title: "" }} />
 			<Searchbar
 				value={searchValue}
-				onChangeText={(text) => preprocessContactList(text)}
+				placeholder={`contoh: "Mas Adit"`}
+				onChangeText={(text) => setSearchValue(text)}
+				onClearIconPress={() => resetSearch()}
 				onIconPress={() => search()}
 				onSubmitEditing={() => search()}
 				style={{ marginBottom: 8, marginHorizontal: 16 }}
@@ -70,7 +83,7 @@ export default function Page() {
 				<Text>loading...</Text>
 			) : (
 				<FlatList
-					data={filteredContactList}
+					data={contactList}
 					contentContainerStyle={{ paddingHorizontal: 16, gap: 8 }}
 					renderItem={({ item, index }) => (
 						<Card
