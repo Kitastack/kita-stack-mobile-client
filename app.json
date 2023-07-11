@@ -6,7 +6,7 @@
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "automatic",
-    "scheme": "myapp",
+    "scheme": "kstackrescue",
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
@@ -30,7 +30,6 @@
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "package": "com.kitastack.kitarescue",
       "permissions": [
         "android.permission.ACCESS_COARSE_LOCATION",
         "android.permission.ACCESS_FINE_LOCATION",
@@ -38,7 +37,8 @@
         "android.permission.ACCESS_BACKGROUND_LOCATION",
         "android.permission.READ_CONTACTS",
         "android.permission.WRITE_CONTACTS"
-      ]
+      ],
+      "package": "com.kitastack.rescue"
     },
     "web": {
       "favicon": "./assets/favicon.png",
@@ -66,9 +66,8 @@
         "origin": false
       },
       "eas": {
-        "projectId": "ef943fb6-50d2-44e2-a3fc-78585a707b87"
+        "projectId": "fc24584c-bfd4-4724-b205-5b471305a8a6"
       }
-    },
-    "owner": "agung-adhinata"
+    }
   }
 }
