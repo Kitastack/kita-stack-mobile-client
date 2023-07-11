@@ -16,7 +16,7 @@ export default function Page() {
 				}}
 			>
 				<TopTab.Screen name="Layanan Umum" component={IndexPage} />
-				<TopTab.Screen name="Member" component={PersonalPage} />
+				<TopTab.Screen name="Kerabat Anda" component={PersonalPage} />
 			</TopTab.Navigator>
 		</>
 	);
