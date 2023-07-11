@@ -6,6 +6,7 @@ import { FlatList, ScrollView, View } from "react-native";
 import {
 	Appbar,
 	Card,
+	Chip,
 	FAB,
 	IconButton,
 	Searchbar,
@@ -14,7 +15,7 @@ import {
 } from "react-native-paper";
 
 export default function Page() {
-	const { member } = useMemberStore();
+	const { member, removeMember } = useMemberStore();
 	const [filteredMember, setFilteredMember] = useState<MemberProps[]>([]);
 	const theme = useTheme();
 	const doSearch = useCallback(() => {}, []);
@@ -31,9 +32,10 @@ export default function Page() {
 					),
 				}}
 			/>
-			<View style={{ flex: 1 }}>
+			<View style={{ flex: 1, paddingHorizontal: 16 }}>
 				<FlatList
 					data={member}
+					contentContainerStyle={{ gap: 8 }}
 					ListEmptyComponent={() => (
 						<View
 							style={{
@@ -46,9 +48,41 @@ export default function Page() {
 						</View>
 					)}
 					renderItem={({ item: items }) => (
-						<Card>
-							<Card.Content>
-								<Text>{items.name}</Text>
+						<Card mode="contained">
+							<Card.Content
+								style={{
+									flexDirection: "row",
+									justifyContent: "space-between",
+									alignItems: "center",
+								}}
+							>
+								<View style={{ flex: 1, gap: 8 }}>
+									<Text variant="titleMedium">
+										{items.name}
+									</Text>
+									<View
+										style={{
+											flexDirection: "row",
+											flexWrap: "wrap",
+											gap: 2,
+										}}
+									>
+										<Chip mode="outlined" icon={"check"}>
+											Telepon
+										</Chip>
+										<Chip mode="outlined" icon={"check"}>
+											SMS
+										</Chip>
+									</View>
+								</View>
+								<View style={{ flexDirection: "row" }}>
+									<IconButton
+										icon={"trash-can-outline"}
+										iconColor={theme.colors.error}
+										onPress={() => removeMember(items.id)}
+									/>
+									{/* <IconButton icon={"account-edit-outline"} /> */}
+								</View>
 							</Card.Content>
 						</Card>
 					)}
@@ -67,7 +101,6 @@ export default function Page() {
 					<Searchbar style={{ flex: 1 }} value="" />
 					<View>
 						<FAB
-							mode="flat"
 							onPress={() => router.push("/member/add")}
 							variant="primary"
 							icon={"plus"}

@@ -6,22 +6,33 @@ export interface MemberProps {
 	id: string;
 	name: string;
 	phoneNumber: string;
+	locationEnabled?: boolean;
+	smsEnabled?: boolean;
 }
 export interface MemberStore {
 	member: MemberProps[];
-	addMember: ({name, phoneNumber}: MemberProps) => void;
+	addMember: ({ id, name, phoneNumber }: MemberProps) => void;
+	setMemberLocation?: (id: string, status: boolean) => void;
+	setMemberSMS?: (id: string, status: boolean) => void;
 	removeMember: (id: string) => void;
 }
 
 export const useMemberStore = create<MemberStore>()(
 	persist(
-		(set) => ({
+		(set, get) => ({
 			member: [],
-			addMember: ({name,phoneNumber}: MemberProps) => {
-				set((state) => ({ member: [...state.member, {id: new Date().toString(), name: name,phoneNumber: phoneNumber}] }));
+			addMember: ({ id, name, phoneNumber }: MemberProps) => {
+				set((state) => ({
+					member: [
+						...state.member,
+						{ id: id, name: name, phoneNumber: phoneNumber },
+					],
+				}));
 			},
 			removeMember: (id: string) => {
-				set(state => ({member: state.member.filter(props=> props.id !== id)}))
+				set((state) => ({
+					member: state.member.filter((props) => props.id !== id),
+				}));
 			},
 		}),
 		{
