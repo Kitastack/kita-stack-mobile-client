@@ -1,6 +1,7 @@
 import { styles } from "@/constants/style";
-import { useMemberStore } from "@/lib/hooks/useMemberStore";
+import { MemberProps, useMemberStore } from "@/lib/hooks/useMemberStore";
 import { Stack, router } from "expo-router";
+import { useCallback, useState } from "react";
 import { FlatList, ScrollView, View } from "react-native";
 import {
 	Appbar,
@@ -14,7 +15,9 @@ import {
 
 export default function Page() {
 	const { member } = useMemberStore();
+	const [filteredMember, setFilteredMember] = useState<MemberProps[]>([]);
 	const theme = useTheme();
+	const doSearch = useCallback(() => {}, []);
 	return (
 		<>
 			<Stack.Screen
@@ -63,7 +66,12 @@ export default function Page() {
 				>
 					<Searchbar style={{ flex: 1 }} value="" />
 					<View>
-						<FAB mode="flat" variant="secondary" icon={"plus"} />
+						<FAB
+							mode="flat"
+							onPress={() => router.push("/member/add")}
+							variant="primary"
+							icon={"plus"}
+						/>
 					</View>
 				</View>
 			</View>
