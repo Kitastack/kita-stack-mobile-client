@@ -21,19 +21,7 @@ export default function Pages() {
 					rowGap: 8,
 				}}
 			>
-				<Card
-					style={{ backgroundColor: theme.colors.errorContainer }}
-					onPress={() => router.push("/datepicker")}
-				>
-					<Card.Content>
-						<Text
-							style={{ color: theme.colors.onErrorContainer }}
-							variant="titleSmall"
-						>
-							Open Dev session
-						</Text>
-					</Card.Content>
-				</Card>
+				<Text>pengaturan belum tersedia untuk saat ini</Text>
 			</ScrollView>
 		</>
 	);

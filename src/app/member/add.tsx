@@ -199,11 +199,12 @@ export default function Page() {
 								}
 								setDialogVisible(false);
 							}}
+							icon={"check"}
 						>
-							Setuju
+							Tambahkan
 						</Button>
 						<Button onPress={() => setDialogVisible(false)}>
-							Batalkan
+							Batal
 						</Button>
 					</Dialog.Actions>
 				</Dialog>
