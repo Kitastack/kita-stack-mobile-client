@@ -8,12 +8,18 @@ export interface MemberProps {
 	phoneNumber: string;
 	locationEnabled?: boolean;
 	smsEnabled?: boolean;
+	phoneEnabled?: boolean;
 }
+
+export type MemberPermission = "LOCATION" | "PHONE" | "SMS";
 export interface MemberStore {
 	member: MemberProps[];
 	addMember: ({ id, name, phoneNumber }: MemberProps) => void;
-	setMemberLocation?: (id: string, status: boolean) => void;
-	setMemberSMS?: (id: string, status: boolean) => void;
+	setMemberPermission?: (
+		id: string,
+		permission: MemberPermission,
+		status: boolean
+	) => void;
 	removeMember: (id: string) => void;
 }
 
@@ -33,6 +39,24 @@ export const useMemberStore = create<MemberStore>()(
 				set((state) => ({
 					member: state.member.filter((props) => props.id !== id),
 				}));
+			},
+			setMemberPermission: (id, permission, status) => {
+				const members = get().member;
+				const memberIdx = members.findIndex((obj) => obj.id === id);
+				switch (permission) {
+					case "LOCATION":
+						members[memberIdx].locationEnabled = status;
+						break;
+					case "PHONE":
+						members[memberIdx].phoneEnabled = status;
+						break;
+					case "SMS":
+						members[memberIdx].smsEnabled = status;
+						break;
+					default:
+						break;
+				}
+				set((state) => ({ member: members }));
 			},
 		}),
 		{
