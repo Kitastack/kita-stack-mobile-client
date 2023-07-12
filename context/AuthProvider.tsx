@@ -13,8 +13,6 @@ const intialState: any = null;
 export type IContext = {
   state: typeof intialState;
   dispatch: React.Dispatch<any>;
-  login?: (_val: any) => void;
-  logout?: () => void;
 };
 
 export const AuthContext = createContext<IContext>({
@@ -26,6 +24,8 @@ export function useAuth() {
   return useContext(AuthContext);
 }
 
+// NOTE: this reducer should not contain router to avoid initial rendering crash (due to router is called before initialized),
+// for routing purpose, use router inside React Component
 export function authReducer(
   state: any,
   action: { type: "login" | "logout"; payload?: any },
@@ -36,7 +36,6 @@ export function authReducer(
     }
     case "logout": {
       state = null;
-      router.push("/sign_in");
     }
     // default: {
     //   throw new Error(`Unhandled action type: ${action.type}`);
@@ -68,11 +67,11 @@ export default function Provider(props: any) {
       const inCustomGroup = segments[0] === "(custom)";
       const isUserLogged = state?._id;
 
-      console.log("ready", $isReady, state?._id);
+      console.log("ready", $isReady, state?._id, segments[0]);
 
       if (!isUserLogged && !inAuthGroup) {
         router.replace("/sign_in");
-      } else if (isUserLogged && inAuthGroup) {
+      } else if (isUserLogged && (inAuthGroup || segments[0] === undefined)) {
         router.replace("/tolong");
       }
     }
