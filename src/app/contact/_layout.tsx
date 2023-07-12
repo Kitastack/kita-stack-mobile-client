@@ -3,7 +3,7 @@ import { useTheme } from "react-native-paper";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 const TopTab = createMaterialTopTabNavigator();
 import IndexPage from "./index";
-import PersonalPage from "./personal";
+import PersonalPage from "./member";
 
 export default function Page() {
 	const theme = useTheme();

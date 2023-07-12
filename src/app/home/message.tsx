@@ -1,68 +1,69 @@
-import { Stack, router } from "expo-router";
-import { ScrollView } from "react-native";
-import {
-	Button,
-	Card,
-	Divider,
-	Text,
-	TextInput,
-	Title,
-} from "react-native-paper";
-import { MemberCard } from "@/components/base/MemberCard";
-import { useMessageStore } from "@/lib/hooks/useMessageStore";
-import * as SMS from "expo-sms";
+import {Stack} from "expo-router";
+import {FlatList, View} from "react-native";
+import {Button, Card, Dialog, Divider, FAB, Portal, Text, TextInput,} from "react-native-paper";
+import {useMessageStore} from "@/lib/hooks/useMessageStore";
+import * as ExpoSMS from "expo-sms";
+import {styles} from "@/constants/style";
+import {useCallback, useEffect, useState} from "react";
+import {MemberProps, useMemberStore} from "@/lib/hooks/useMemberStore";
+
 export default function Page() {
-	const { message, setMessage, targetMember, setTargetMember } =
-		useMessageStore();
+    const {member} = useMemberStore()
+    const {message ,setMessage} = useMessageStore()
+    const [dialogVisible, setDialogVisible] = useState(false)
+    const [members, setMembers] = useState<MemberProps[]>([])
+    // const [message, setMessage] = useState("")
 
-	function removeItem(id: string) {
-		setTargetMember(targetMember.filter((item, i) => item.id !== id));
-	}
+    //functions
+    const refreshMembers = useCallback(() => {
+        setMembers(member.filter((item, _) => item.smsEnabled))
+    }, [member])
+    const getPhoneNumbers = useCallback(()=> {
+        return members.map((val) => val.phoneNumber)
+    },[members])
 
-	async function sendMessage() {
-		const isAvaiable = await SMS.isAvailableAsync();
-		if (isAvaiable) {
-			console.log("SMS activated");
-			const numbers = targetMember.map((item, i) => item.phoneNumber);
-			const { result } = await SMS.sendSMSAsync([...numbers], message);
-			if (result === "sent") {
-				console.log("done!");
-			}
-		}
-	}
+    const sendSMS = () => {
+        (async ()=> {
+                const isAvaiable = await ExpoSMS.isAvailableAsync()
+                if (isAvaiable) {
+                    const {result} = await ExpoSMS.sendSMSAsync(getPhoneNumbers(),message)
+                }
+            }
+        )()
+    }
 
-	return (
-		<>
-			<Stack.Screen options={{ title: "Pesan" }} />
-			<ScrollView style={{ rowGap: 8, paddingHorizontal: 16 }}>
-				<Title>pesan yang akan dikirim</Title>
-				<TextInput
-					mode="flat"
-					numberOfLines={5}
-					value={message}
-					onChangeText={setMessage}
-				/>
-				<Divider style={{ marginVertical: 8 }} />
-				<Text>Kerabat yang akan menerima:</Text>
-				{targetMember.map((val, i) => (
-					<MemberCard
-						key={i}
-						name={val.name}
-						phoneNumber={val.phoneNumber}
-						onDelete={() => removeItem(val.id)}
-					/>
-				))}
+    // effect
+    useEffect(() => {
+        refreshMembers()
+    }, [])
+    return (
+        <>
+            <Stack.Screen options={{title: "Pesan"}}/>
+            <View style={{flex: 1, paddingHorizontal: 16}}>
+                <Text>Berikut adalah teks yang akan anda kirim: </Text>
+                <TextInput value={message} onChangeText={setMessage}/>
+                <Divider style={{marginVertical: 16}}/>
+                <Text>berikut adalah kerabat yang menerima pesan anda</Text>
+                <FlatList data={members} renderItem={({item}) => (<Card mode={"outlined"} ><Card.Content>
+                <Text>{item.name}</Text>
+                <Text>{item.phoneNumber}</Text>
+                </Card.Content></Card>)}/>
+            </View>
+            <View>
 
-				<Button
-					icon={"square-edit-outline"}
-					onPress={() => router.push("/home/getContacts")}
-				>
-					Ganti kerabat yang menerima
-				</Button>
-				<Button mode="contained" onPress={() => sendMessage()}>
-					send sms
-				</Button>
-			</ScrollView>
-		</>
-	);
+            </View>
+            <FAB style={styles.fab} icon={"send"} onPress={()=> setDialogVisible(true)}/>
+            <Portal>
+                <Dialog visible={dialogVisible} onDismiss={()=> setDialogVisible(false)}>
+                    <Dialog.Title ><Text>Apakah anda yakin untuk mengirim ini?</Text></Dialog.Title>
+                    <Dialog.Content>
+                        <Text>Anda akan diarakan ke menu SMS</Text></Dialog.Content>
+                    <Dialog.Actions>
+                        <Button onPress={()=> sendSMS()} >Kirim</Button>
+                        <Button onPress={()=> setDialogVisible(false)}>Batalkan</Button>
+                    </Dialog.Actions>
+                </Dialog>
+            </Portal>
+        </>
+    );
 }

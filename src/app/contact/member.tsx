@@ -1,7 +1,7 @@
 import { styles } from "@/constants/style";
 import { useContactStore } from "@/lib/hooks/useContactStore";
 import { Tabs } from "expo-router";
-import { useCallback } from "react";
+import {useCallback, useEffect, useState} from "react";
 import { FlatList, View } from "react-native";
 import {
 	Avatar,
@@ -12,17 +12,23 @@ import {
 	Text,
 	Tooltip,
 } from "react-native-paper";
+import {MemberProps, useMemberStore} from "@/lib/hooks/useMemberStore";
 
 export default function Page() {
-	const { member } = useContactStore();
-	const testFAB = useCallback(() => console.log("test"), []);
+
+	const {member} = useMemberStore()
+	const [members, setMembers] = useState<MemberProps[]>([])
+	const getMember = useCallback(()=> {
+		setMembers(member.filter((item,i)=> item.phoneEnabled))
+	},[member])
+	useEffect(()=>getMember(),[member])
 	return (
 		<>
 			<FlatList
-				data={member}
+				data={members}
 				renderItem={({ item }) => (
 					<Card>
-						<Card.Title title={item.name} />
+						<Card.Title title={item.name} subtitle={item.phoneNumber} />
 					</Card>
 				)}
 				ListEmptyComponent={() => (
@@ -33,7 +39,7 @@ export default function Page() {
 							alignItems: "center",
 						}}
 					>
-						<Text>Anda belum menambahkan anggota</Text>
+						<Text>Anda belum menambahkan kerabat. untuk menambah kerabat, anda dapat mengakses alaman ini</Text>
 					</View>
 				)}
 			/>
