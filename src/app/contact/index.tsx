@@ -90,7 +90,15 @@ export default function Page() {
 						</Text>
 					</Dialog.Content>
 					<Dialog.Actions>
-						<Button mode="outlined" icon={"phone"}>
+						<Button
+							mode="outlined"
+							icon={"phone"}
+							onPress={() =>
+								Linking.openURL(
+									`tel:${selectedContact.phoneNumber}`
+								)
+							}
+						>
 							Panggil
 						</Button>
 						<Button

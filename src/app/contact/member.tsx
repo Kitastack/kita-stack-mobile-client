@@ -1,7 +1,8 @@
 import { styles } from "@/constants/style";
 import { useContactStore } from "@/lib/hooks/useContactStore";
 import { Tabs } from "expo-router";
-import {useCallback, useEffect, useState} from "react";
+import * as Linking from "expo-linking";
+import { useCallback, useEffect, useState } from "react";
 import { FlatList, View } from "react-native";
 import {
 	Avatar,
@@ -12,23 +13,29 @@ import {
 	Text,
 	Tooltip,
 } from "react-native-paper";
-import {MemberProps, useMemberStore} from "@/lib/hooks/useMemberStore";
+import { MemberProps, useMemberStore } from "@/lib/hooks/useMemberStore";
 
 export default function Page() {
-
-	const {member} = useMemberStore()
-	const [members, setMembers] = useState<MemberProps[]>([])
-	const getMember = useCallback(()=> {
-		setMembers(member.filter((item,i)=> item.phoneEnabled))
-	},[member])
-	useEffect(()=>getMember(),[member])
+	const { member } = useMemberStore();
+	const [members, setMembers] = useState<MemberProps[]>([]);
+	const getMember = useCallback(() => {
+		setMembers(member.filter((item, i) => item.phoneEnabled));
+	}, [member]);
+	useEffect(() => getMember(), [member]);
 	return (
 		<>
 			<FlatList
 				data={members}
 				renderItem={({ item }) => (
-					<Card>
-						<Card.Title title={item.name} subtitle={item.phoneNumber} />
+					<Card
+						onPress={() =>
+							Linking.openURL(`tel:${item.phoneNumber}`)
+						}
+					>
+						<Card.Title
+							title={item.name}
+							subtitle={item.phoneNumber}
+						/>
 					</Card>
 				)}
 				ListEmptyComponent={() => (
@@ -39,7 +46,10 @@ export default function Page() {
 							alignItems: "center",
 						}}
 					>
-						<Text>Anda belum menambahkan kerabat. untuk menambah kerabat, anda dapat mengakses alaman ini</Text>
+						<Text>
+							Anda belum menambahkan kerabat. untuk menambah
+							kerabat, anda dapat mengakses alaman ini
+						</Text>
 					</View>
 				)}
 			/>
