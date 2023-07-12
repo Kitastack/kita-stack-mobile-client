@@ -1,5 +1,5 @@
 export const ARROW = {
-	LEFT: 0,
-	TOP: 1,
-	RIGHT: 2,
+  LEFT: 0,
+  TOP: 1,
+  RIGHT: 2,
 };

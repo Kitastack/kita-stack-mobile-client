@@ -9,16 +9,16 @@ import { NativeStackHeaderProps } from "@react-navigation/native-stack";
  * You can overide this by disable stack header and use `<AppBar/>` from `react-native-paper` directly into routes
  */
 export default function MyAppBar({
-	route,
-	options,
-	back,
+  route,
+  options,
+  back,
 }: NativeStackHeaderProps) {
-	const title = getHeaderTitle(options, route.name);
-	const theme = useTheme();
-	return (
-		<Appbar.Header style={{ backgroundColor: theme.colors.surface }}>
-			{back ? <Appbar.BackAction onPress={() => router.back()} /> : <></>}
-			<Appbar.Content title={title || ""} />
-		</Appbar.Header>
-	);
+  const title = getHeaderTitle(options, route.name);
+  const theme = useTheme();
+  return (
+    <Appbar.Header style={{ backgroundColor: theme.colors.surface }}>
+      {back ? <Appbar.BackAction onPress={() => router.back()} /> : <></>}
+      <Appbar.Content title={title || ""} />
+    </Appbar.Header>
+  );
 }

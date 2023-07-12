@@ -37,7 +37,7 @@ export default function Layout() {
       colorScheme === "dark"
         ? { ...combinedTheme.dark }
         : { ...combinedTheme.default },
-    [colorScheme]
+    [colorScheme],
   );
 
   return (

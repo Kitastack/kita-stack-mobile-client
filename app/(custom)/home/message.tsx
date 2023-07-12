@@ -38,7 +38,7 @@ export default function Page() {
       if (isAvaiable) {
         const { result } = await ExpoSMS.sendSMSAsync(
           getPhoneNumbers(),
-          message
+          message,
         );
       }
     })();

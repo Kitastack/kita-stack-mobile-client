@@ -3,7 +3,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 export async function $useStorage(
   id: string,
   value?: any,
-  instance: boolean = false
+  instance: boolean = false,
 ) {
   let result: any = null;
   const store = async (_payload: string) =>
