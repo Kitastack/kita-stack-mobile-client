@@ -33,16 +33,16 @@ const cardItems: CardItemProp[] = [
 		href: "/home/message",
 	},
 	{
-		icon: "map-marker",
-		title: "Lokasi",
-		subtitle: "lokasimu",
-		href: "/home/location",
-	},
-	{
 		icon: "account-group-outline",
 		title: "Kerabat",
 		subtitle: "Kelola kerabat yang dapat anda hubungi",
 		href: "/member",
+	},
+	{
+		icon: "map-marker",
+		title: "Lokasi",
+		subtitle: "lokasimu",
+		href: "/home/location",
 	},
 	{
 		icon: "toolbox-outline",
