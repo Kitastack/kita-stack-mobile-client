@@ -16,9 +16,8 @@ export default function Page() {
 	useEffect(() => {
 		(async () => {
 			try {
-				const { status } =
-					await Location.requestForegroundPermissionsAsync();
-				if (status === Location.PermissionStatus.GRANTED) {
+				const permission = await requestLocation();
+				if (permission.foreground && permission.background === true) {
 					setLocationStatus("granted");
 					const data = await Location.getProviderStatusAsync();
 					const data2 = await Location.getCurrentPositionAsync();

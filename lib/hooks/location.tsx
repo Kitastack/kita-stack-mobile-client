@@ -11,8 +11,11 @@ function useLocation() {
 			const { status } =
 				await Location.requestBackgroundPermissionsAsync();
 			if (status === PermissionStatus.GRANTED) {
+				return { foreground: true, background: true };
 			}
+			return { foreground: true, background: false };
 		}
+		return { foreground: false, background: false };
 	};
 	const startBackgroundLocation = async () => {
 		// Don't track position if permission is not granted
