@@ -3,7 +3,6 @@ import { useTheme } from "react-native-paper";
 import { View } from "react-native";
 // import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 import { BottomNavigation, Text, Button } from "react-native-paper";
-import AuthProvider from "@/context/AuthProvider";
 import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
 import React from "react";
 

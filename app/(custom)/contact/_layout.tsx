@@ -10,7 +10,7 @@ export default function Page() {
   return (
     <>
       <Appbar.Header>
-        <Appbar.BackAction onPress={() => router.push("/user")} />
+        <Appbar.BackAction onPress={() => router.back()} />
         <Appbar.Content title="Halaman User" />
         {/* <Appbar.Action
           icon={"account"}
