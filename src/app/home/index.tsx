@@ -69,7 +69,7 @@ export default function Page() {
 									backgroundColor: paperTheme.colors.surface,
 								}}
 							>
-								<Appbar.Content title="Hallo, Adhinata" />
+								<Appbar.Content title="Selamat Datang" />
 								<Appbar.Action
 									icon={"account"}
 									aria-label="Akun"

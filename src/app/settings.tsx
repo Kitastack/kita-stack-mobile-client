@@ -3,20 +3,9 @@ import React from "react";
 import { useState } from "react";
 import { ScrollView, View } from "react-native";
 import { Appbar, Button, Card, Text, useTheme } from "react-native-paper";
-import { TimePicker, TimePickerModal } from "react-native-paper-dates";
 export default function Pages() {
 	const theme = useTheme();
 	const [visible, setVisible] = useState(false);
-	const onDismiss = React.useCallback(() => {
-		setVisible(false);
-	}, [setVisible]);
-	const onConfirm = React.useCallback(
-		({ hours, minutes }: { hours: number; minutes: number }) => {
-			setVisible(false);
-			console.log({ hours, minutes });
-		},
-		[setVisible]
-	);
 	return (
 		<>
 			<Stack.Screen options={{ header: () => null }} />
