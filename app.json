@@ -4,19 +4,24 @@
     "slug": "krescue",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./src/assets/icon.png",
     "userInterfaceStyle": "automatic",
-    "scheme": "myapp",
+    "scheme": "kstackrescue",
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "./src/assets/splash.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
-    "assetBundlePatterns": ["**/*"],
+    "assetBundlePatterns": [
+      "**/*"
+    ],
     "ios": {
       "supportsTablet": false,
       "infoPlist": {
-        "UIBackgroundModes": ["location", "fetch"],
+        "UIBackgroundModes": [
+          "location",
+          "fetch"
+        ],
         "NSContactsUsageDescription": "Allow $(PRODUCT_NAME) to access your contacts."
       }
     },
@@ -31,18 +36,11 @@
         "android.permission.FOREGROUND_SERVICE",
         "android.permission.ACCESS_BACKGROUND_LOCATION",
         "android.permission.READ_CONTACTS",
-        "android.permission.WRITE_CONTACTS",
-        "android.permission.VIBRATE"
-      ],
-      "package": "com.kitastack.krescue",
-      "config": {
-        "googleMaps": {
-          "apiKey": "AIzaSyB3rL-lDNluWVtvdtqwb6a_osJHcyyc8-o"
-        }
-      }
+        "android.permission.WRITE_CONTACTS"
+      ]
     },
     "web": {
-      "favicon": "./assets/favicon.png",
+      "favicon": "./src/assets/favicon.png",
       "bundler": "metro"
     },
     "plugins": [
@@ -69,7 +67,6 @@
       "eas": {
         "projectId": "1e2f2474-5b94-47b3-8347-9562a78972e9"
       }
-    },
-    "owner": "agung-adhinata"
+    }
   }
 }
