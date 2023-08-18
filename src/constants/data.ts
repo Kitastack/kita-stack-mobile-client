@@ -1,5 +1,5 @@
 interface SettingsListDataProps {
-	name: string;
+  name: string;
 }
 
 const settingsListData = [];

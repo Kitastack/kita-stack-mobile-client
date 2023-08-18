@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "Kita Rescue",
-    "slug": "kitarescue",
+    "name": "KitaRescue",
+    "slug": "krescue",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./src/assets/icon.png",
@@ -27,7 +27,7 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./src/assets/adaptive-icon.png",
+        "foregroundImage": "./assets/icon.png",
         "backgroundColor": "#ffffff"
       },
       "permissions": [
@@ -37,8 +37,7 @@
         "android.permission.ACCESS_BACKGROUND_LOCATION",
         "android.permission.READ_CONTACTS",
         "android.permission.WRITE_CONTACTS"
-      ],
-      "package": "com.kitastack.rescue"
+      ]
     },
     "web": {
       "favicon": "./src/assets/favicon.png",
@@ -66,7 +65,7 @@
         "origin": false
       },
       "eas": {
-        "projectId": "fc24584c-bfd4-4724-b205-5b471305a8a6"
+        "projectId": "1e2f2474-5b94-47b3-8347-9562a78972e9"
       }
     }
   }
